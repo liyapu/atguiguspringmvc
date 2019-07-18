@@ -2,6 +2,7 @@ package com.lyp.learn.demo.pk01;
 
 
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +14,19 @@ import java.util.Map;
 public class Hello {
 
     private static final String  SUCCESS = "success";
+
+    /**
+     * 为了测试 spring 与 springMVC 整合
+     */
+    public Hello(){
+        System.out.println("Hello constructor ...........");
+    }
+
+    /**
+     * 为了测试 spring 与 springMVC 整合
+     */
+    @Autowired
+    private UserService userService;
 
     /**
      * 1.使用@RequestMapping注解来映射请求的 URL
