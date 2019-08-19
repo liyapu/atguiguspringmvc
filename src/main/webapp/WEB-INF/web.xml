@@ -9,6 +9,9 @@
   <!--
         配置启动 Spring IOC 容器的 Listener
         配置Listener启动需要的配置文件
+
+        ContextLoaderListener的作用就是启动Web容器时，自动装配ApplicationContext的配置信息。
+        因为它实现了ServletContextListener这个接口，在web.xml配置这个监听器，启动容器时，就会默认执行它实现的方法。 
     -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
@@ -45,6 +48,7 @@
             <param-value>UTF-8</param-value>
         </init-param>
         <init-param>
+            <!--true：无论request是否指定了字符集，都使用encoding；false：如果request已指定一个字符集，则不使用encoding -->
             <param-name>forceEncoding</param-name>
             <param-value>true</param-value>
         </init-param>
@@ -55,7 +59,10 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <!-- 配置 DispatcherServlet -->
+    <!-- 配置 DispatcherServlet
+        DispatcherServlet是前置控制器，配置在web.xml文件中。拦截匹配的请求，Servlet拦截匹配规则要自已定义，
+        把拦截下来的请求，依据某某规则分发到目标Controller(我们写的Action)来处理
+    -->
     <servlet>
         <servlet-name>dispatcherServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
